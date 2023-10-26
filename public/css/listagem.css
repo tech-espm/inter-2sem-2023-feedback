@@ -2,13 +2,11 @@
   display: none;
 }
 
-h1 {
-  margin-top: 30px;
-}
 .horizontal-scrollable {
   background-color: rgb(144,0,51);
   border-radius: 20px;
-  min-width: 90%;
+  min-width: 40%;
+  max-width: 80%;
 }
 
 .horizontal-scrollable > .row {
@@ -18,13 +16,6 @@ h1 {
 
 .horizontal-scrollable > .row > .col{
     display: inline-block;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Abel');
-
-html, body {
-    background: #FCEEB5;
-    font-family: Abel, Arial, Verdana, sans-serif;
 }
 
 .center {
