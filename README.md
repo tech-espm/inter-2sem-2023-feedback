@@ -11,7 +11,7 @@
 ## Integrantes
 - [Luigi Tomassone](https://github.com/Luigi052/)
 - [Felipe de Arruda](https://github.com/FelipeBotelho94/)
-- [Gabriel Fuzita](https://github.com/Garibaldo95/)
+- [Gabriel Fuzita](https://github.com/Gafucha)
 - [Rafael Ambrosio](https://github.com/rafaoambrosio/)
 - [Gustavo Fabisiak](https://github.com/Fbk21/)
 ## Descrição do Projeto
