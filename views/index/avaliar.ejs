@@ -1,0 +1,510 @@
+<span class="fa fa-star" id="star" hidden="true"></span>
+<h1 style="text-align: center;">AVALIAR</h1>
+
+<br>
+
+<h1 style="text-align:center">Curso - Sistemas de Informação</h1>
+<div class="container-fluid" style="text-align: center; align-items:center;">
+	<div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
+		<div class="col-lg-4">
+			<div style="width: max-content; margin: 20px auto;">
+				<div style="min-width:max-content">
+					<div class="profover">
+						<img src="https://avatars.githubusercontent.com/u/49880458?s=280&amp;v=4" class="profimg">
+						<h1>4.6</h1>
+						<h6>Qualidade Geral</h6>
+					</div>
+					<div class="profover" style="margin-top: 20px;">
+						<h4>Observações</h4>
+						<textarea name="obs" id="obs" cols="18" rows="6"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="profpoints">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="ratxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeA" oninput="UpdateRange(this, 'ratxt')">
+								</h4>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rbtxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeB" oninput="UpdateRange(this, 'rbtxt')">
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rctxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeC" oninput="UpdateRange(this, 'rctxt')">
+								</h4>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rdtxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeD" oninput="UpdateRange(this, 'rdtxt')">
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="retxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeE" oninput="UpdateRange(this, 'retxt')">
+								</h4>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rftxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeF" oninput="UpdateRange(this, 'rftxt')">
+								</h4>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rgtxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeG" oninput="UpdateRange(this, 'rgtxt')">
+								</h4>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="profcat" style="display:contents;">
+								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatrating" style="display: block;">
+									<p id="rhtxt">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeH" oninput="UpdateRange(this, 'rhtxt')">
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
+		<div class="col-sm-3">
+			<div class="proftitle">
+				<h4>Curtiu?</h4>
+				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="likebtn" onclick="ChangeColor(this, 'red')">
+					<span class="fa fa-heart like"></span>
+				</button>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="proftitle">
+				<h4>Nome</h4>
+				<h6>Opcional</h6>
+				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Nome">
+			</div>
+		</div>
+		<div class="col-sm-3">
+			<div class="proftitle">
+				<h4 id="sendtxt">Enviar</h4>
+				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="sendbtn" onclick="ChangeColor(this, 'white')">
+					<span class="fa fa-send send"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<%- contentFor("espaco-head") %>
+<style>
+	.center {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		-webkit-transform: translate(-50%, -50%);
+	}
+	
+	.card {
+		width: 450px;
+		height: 250px;
+		background-color: #fff;
+		background: linear-gradient(#f8f8f8, #fff);
+		box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+		border-radius: 20px;
+		overflow: hidden;
+		position: relative;
+		margin: 1.5rem;
+	}
+	
+	.card h1 {
+		text-align: center;
+	}
+	
+	.card .additional {
+		position: absolute;
+		width: 150px;
+		height: 100%;
+		background: linear-gradient(#dE685E, #EE786E);
+		transition: width 0.4s;
+		overflow: hidden;
+		z-index: 2;
+	}
+	
+	.card.green .additional {
+		background: transparent;
+	}
+	
+	
+	.card:hover .additional {
+		width: 100%;
+		border-radius: 0 5px 5px 0;
+	}
+	
+	.card .additional .user-card {
+		width: 150px;
+		height: 100%;
+		position: relative;
+		float: left;
+		background-color:rgb(124,0,44)
+	}
+	
+	.card .additional .user-card::after {
+		content: "";
+		display: block;
+		position: absolute;
+		top: 10%;
+		right: -2px;
+		height: 80%;
+		border-left: 2px solid rgba(0,0,0,0.025);
+	}
+	
+	.card .additional .user-card .level,
+	.card .additional .user-card .points {
+	  top: 15%;
+	  color: #fff;
+	  text-transform: uppercase;
+	  font-size: 0.75em;
+	  font-weight: bold;
+	  background: rgba(0,0,0,0.15);
+	  padding: 0.125rem 0.75rem;
+	  border-radius: 100px;
+	  white-space: nowrap;
+	}
+	
+	.card .additional .user-card .points {
+	  top: 85%;
+	}
+	
+	.card .additional .user-card svg {
+	  top: 50%;
+	}
+	
+	.card .additional .more-info {
+	  width: 300px;
+	  float: left;
+	  position: absolute;
+	  left: 150px;
+	  height: 100%;
+	  background-color:rgb(124,0,44);
+	  padding-top:20px;
+	}
+	
+	.card .additional .more-info h1 {
+	  color: #fff;
+	  margin-bottom: 0;
+	  padding-bottom: 10px;
+	}
+	
+	.card.green .additional .more-info h1 {
+	  color: #224C36;
+	}
+	
+	.card .additional .coords {
+	  margin: 0 1rem;
+	  color: #fff;
+	  font-size: smaller;
+	}
+	
+	.card.green .additional .coords {
+	  color: #325C46;
+	}
+	
+	.card .additional .coords span + span {
+	  float: right;
+	}
+	
+	.card .additional .stats {
+	  font-size: 2rem;
+	  display: flex;
+	  position: absolute;
+	  bottom: 1rem;
+	  left: 1rem;
+	  right: 1rem;
+	  top: auto;
+	  color: #fff;
+	}
+	
+	.card.green .additional .stats {
+	  color: #325C46;
+	}
+	
+	.card .additional .stats > div {
+	  flex: 1;
+	  text-align: center;
+	}
+	
+	.card .additional .stats i {
+	  display: block;
+	}
+	
+	.card .additional .stats div.title {
+	  font-size: 0.75rem;
+	  font-weight: bold;
+	  text-transform: uppercase;
+	}
+	
+	.card .additional .stats div.value {
+	  font-size: 1.5rem;
+	  font-weight: bold;
+	  line-height: 1.5rem;
+	}
+	
+	.card .additional .stats div.value.infinity {
+	  font-size: 2.5rem;
+	}
+	
+	.card .general {
+	  width: 300px;
+	  height: 100%;
+	  position: absolute;
+	  top: 0;
+	  right: 0;
+	  z-index: 1;
+	  box-sizing: border-box;
+	  padding: 1rem;
+	  padding-top: 0;
+	}
+	
+	.card .general .more {
+	  position: absolute;
+	  bottom: 1rem;
+	  right: 1rem;
+	  font-size: 0.9em;
+	}
+	
+	.checked {
+	  color: rgb(255, 208, 0);
+	}
+	
+	.fa-star-half {
+	  color: rgb(255, 208, 0);
+	}
+	
+	.btn-outline-success {
+	  outline:2px solid gray !important;
+	}
+	
+	.profs {
+	  position: inherit;
+	  text-align: left;
+	  justify-content: left;
+	  align-items: left;
+	}
+	
+	.halfstarbox {
+	  width: 11px;
+	  height: 15px;
+	  position: relative;
+	  display: inline-flex;
+	}
+	
+	.starbox {
+	  width: 100%;
+	  height: 100%;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	}
+	
+	.starbox-overlay {
+	  z-index: 9;
+	}
+
+	.profover {
+		text-align: center;
+		background-color: #d9d9d9;
+		border-radius: 20px;
+		margin: auto;
+		min-width: max-content;
+		padding: 40px;
+	}
+	
+	.profimg {
+		max-width: 180px;
+		max-height: 180px;
+		border-radius: 20px;
+		margin: auto;
+	}
+	
+	.profpoints {
+		text-align: left;
+		background-color: rgb(144, 0, 51);
+		border-radius: 20px;
+		margin: 20px auto;
+		max-width: max-content;
+		padding: 40px;
+	}
+	
+	.profcat {
+		display: inline-flex;
+		text-align: center;
+		align-items: center;
+		margin: auto;
+	}
+	
+	.profcatname {
+		padding: 20px;
+		color: white;
+		text-align: center;
+	}
+	
+	.profcatrating {
+		text-align: center;
+		background-color: #d9d9d9;
+		border-radius: 20px;
+		padding: 20px;
+		min-width: max-content;
+	}
+	
+	.proftitle {
+		background-color: #d9d9d9;
+		border-radius: 20px;
+		padding: 20px;
+		width: max-content;
+		margin: 20px auto;
+	}
+	
+	.profsobre {
+		max-width: 80%;
+		min-width: 60%;
+		background-color: #d9d9d9;
+		border-radius: 20px;
+		text-align: left;
+		margin: auto;
+		padding: 20px;
+	}
+	
+	.footer {
+		bottom: 0;
+	}
+	
+	.checked {
+		color: rgb(255, 208, 0);
+	}
+	  
+	.fa-star-half {
+		color: rgb(255, 208, 0);
+	}
+	
+	.halfstarbox {
+		width: 11px;
+		height: 15px;
+		position: relative;
+		display: inline-flex;
+	}
+	
+	.starbox {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+	.starbox-overlay {
+		z-index: 9;
+	}
+	
+	.profreviews {
+		background-color: #d9d9d9;
+		border-radius: 20px;
+		padding: 20px;
+		max-width: max-content;
+		margin: auto;
+		text-align: center;
+	}
+	
+	.review {
+		padding: 20px;
+		max-width: max-content;
+		margin: auto;
+		align-items: center;
+	}
+	
+	.reviewname {
+		font-weight: 600;
+		font-size: large;
+		margin: 0;
+	}
+	
+	.reviewcat {
+		font-weight: 600;
+		font-size: small;
+		margin: 0;
+	}
+	
+	.fa-arrow-circle-down {
+		padding: 20px;
+	}
+	
+	.like:hover {
+		color: red;
+	}
+	
+	.send:hover {
+		color: white;
+	}
+</style>
+
+<%- contentFor("espaco-rodape") %>
+<script>
+    function ChangeColor(ele, color) {
+        var id = ele.id
+        var curcolor = document.getElementById(id).style.color
+        if (curcolor == color) {
+            document.getElementById(id).style.color = "black"
+        } else {
+            document.getElementById(id).style.color = color
+            if (id == 'sendbtn') {
+                document.getElementById('sendtxt').innerHTML = 'Enviado!'
+            }
+            document.getElementById(id).disabled = true
+        }
+    }
+    function UpdateRange(ele, txt) {
+        var star = document.getElementById('star').cloneNode()
+        star.hidden = false
+        document.getElementById(txt).innerHTML = (document.getElementById(ele.id).value).toString() + ' ' + star.outerHTML
+        console.log('called')
+    }
+</script>

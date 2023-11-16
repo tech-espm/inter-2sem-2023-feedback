@@ -21,6 +21,38 @@ class IndexRoute {
 		res.render("index/perfil", opcoes);
 	}
 
+	public async cursos(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Cursos"
+		};
+
+		res.render("index/cat_cursos", opcoes);
+	}
+
+	public async materias(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Matérias"
+		};
+
+		res.render("index/cat_materias", opcoes);
+	}
+
+	public async profs(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Professores"
+		};
+
+		res.render("index/cat_profs", opcoes);
+	}
+
+	public async avalie(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Avaliar"
+		};
+
+		res.render("index/avaliar", opcoes);
+	}
+
 	public async produtos(req: app.Request, res: app.Response) {
 		let produtoA = {
 			id: 1,
