@@ -1,0 +1,113 @@
+.limitador {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.bemvindo {
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.bemvindotxt {
+    text-align: center;
+    font-weight: bold;
+    background-color: #d9d9d9;
+    padding: 20px;
+    border: 1px transparent;
+    border-radius: 20px;
+    max-width: fit-content;
+    margin: auto;
+}
+
+.hozseppadrao {
+    height: 100px;
+    color: rgb(144, 0, 51);
+}
+
+.top5 {
+    width: 100%;
+    font-weight: bold;
+    align-items: center;
+    color: white;
+}
+
+.top5table {
+    background-color: rgb(144, 0, 51);
+    border: 1px transparent;
+    border-radius: 20px;
+    justify-content: center;
+    padding: 20px;
+    padding-top: 0;
+    min-width: 300px;
+    max-width: 350px;
+    display: inline-block;
+    text-align: left;
+    margin: 15px;
+}
+
+.top5row {
+    text-align: center;
+    margin: auto;
+    overflow: hidden;
+}
+
+.top5card {
+    background-color: #d9d9d9;
+    border: 1px transparent;
+    border-radius: 15px;
+    padding: 10px;
+    width: max-content;
+    text-wrap: nowrap;
+    display: inline-block;
+    margin: 10px;
+    margin-left: 5px;
+    color: black;
+}
+
+.top5cardnum {
+    background-color: #d9d9d9;
+    border: 1px transparent;
+    border-radius: 15px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: inline-block;
+    margin: 10px;
+    margin-right: 5px;
+    color: black;
+}
+
+.top5rank {
+    width: 100%;
+    text-wrap: none;
+}
+
+.homeinfo {
+    text-align: center; 
+    width:100%;
+}
+
+.homeinfocard {
+    background-color: rgb(144, 0, 51);
+    padding: 20px;
+    color: white;
+    border: 1px transparent;
+    border-radius: 20px;
+    min-width: 300px;
+    max-width: 350px;
+    margin: 20px auto;
+}
+
+.footer {
+    text-align: center;
+    color: white;
+    width: 100%;
+    background-color: black;
+    padding: 20px;
+    margin: 20px 0 0;
+}
+
+body {
+    background-color: rgb(182, 182, 182);
+}

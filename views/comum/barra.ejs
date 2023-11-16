@@ -1,37 +1,55 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color: rgb(144, 0, 51); font-size:20px; font-weight:600">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#" style="color:white"><strong>RateMyTeacher ESPM</strong></a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<div class="nav-item dropdown profile">
+			<a class="nav-link mx-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<img src="https://www.pngkey.com/png/full/52-523516_empty-profile-picture-circle.png" style="max-width: 60px; max-height: 60px; padding-right: 20px">
+			</a>
+			<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				<li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+				<li><a class="dropdown-item" href="#">Minhas Avaliações</a></li>
+				<li><a class="dropdown-item" href="#">Sair</a></li>
+			</ul>
+		</div>
+		<a class="navbar-brand" href="/" style="font-size: 22px; font-weight:500;letter-spacing:1px"><strong>RateMyTeacher ESPM</strong></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+		<div class=" collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#" style="color: white;"><strong>PÁGINA INICIAL</strong></a>
+					<a class="nav-link mx-2 active" aria-current="page" href="/">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" style="color:white"><strong>LISTAGEM</strong></a>
+					<a class="nav-link mx-2" href="#">
+						Ranking
+					</a>
+				</li>
+				<li class="nav-item" style="min-width: max-content;">
+					<a class="nav-link mx-2" href="/sobre">
+						Sobre Nós
+					</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: white;">
-						<strong>CATEGORIAS</strong>
+					<a class="nav-link mx-2 dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Categorias
 					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color: gray;">
-						<li><a class="dropdown-item" href="#" style="color: white;"><strong>PROFESSORES</strong></a></li>
-						<li><a class="dropdown-item" href="#" style="color:white"><strong>CURSOS</strong></a></li>
-						<li><a class="dropdown-item" href="#" style="color:white"><strong>AULAS</strong></a></li>
-						<li><hr class="dropdown-divider"></li>
-						<li><a class="dropdown-item" href="#" style="color:white"><strong>TODOS</strong></a></li>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" href="#">Cursos</a></li>
+						<li><a class="dropdown-item" href="#">Matérias</a></li>
+						<li><a class="dropdown-item" href="#">Professores</a></li>
 					</ul>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" style="color:white;"><strong>link</strong></a>
+				<li class="nav-item form">
+					<form class="form-inline">
+						<div class="input-group">                    
+							<input type="text" class="form-control" placeholder="Buscar">
+							<div class="input-group-append">
+								<button type="button" class="btn" style="background-color: #d9d9d9;"><i class="fa fa-search"></i></button>
+							</div>
+						</div>
+					</form>
 				</li>
 			</ul>
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit" style="color: white; outline: 2px solid gray;border-color:transparent"><strong>BUSCAR</strong></button>
-			</form>
 		</div>
 	</div>
 </nav>
