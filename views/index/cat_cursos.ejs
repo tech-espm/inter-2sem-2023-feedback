@@ -195,6 +195,161 @@
 			<div class="rankingframe">
 				<h1>CURSOS</h1>
 				<hr>
+				<% for (let i = 0; i < data.length; i+=2) { %>
+					<div class="row rankingrow">
+						<% if (i < data.length) { %>
+						<div class="col-xl-6 displaycard">
+							<a href="#" target="_blank" style="color: black;">
+								<div class="card">
+									<div class="additional">
+										<div class="user-card">
+											<div class="level center">
+											<%
+												let totalstars = Math.round(data[i].mediaGeral * 2)/2;
+												let fullstars = Math.floor(totalstars);
+												let halfstars = totalstars - fullstars;
+												let emptystars = 5 - Math.ceil(totalstars);
+											%>
+											<% for (let j=0; j < fullstars; j ++) { %>
+												<span class="fa fa-star checked"></span>
+											<% } %>
+											<% if (halfstars > 0) { %>
+												<span class="fa fa-star-half-o checked"></span>
+											<% } %>
+											<% for (let j=0; j < emptystars ; j ++) { %>
+												<span class="fa fa-star"></span>
+											<% } %>
+											</div>
+											<img class="cardpic" src="<%= data[i].foto %>" style="max-width: 110px; max-height: 110px; position:relative; margin-top: 70px; margin-left: 20px; border-radius:50%">
+											<div class="points center">
+												<%= data[i].numeroAvaliacoes %> Avaliacões
+											</div>
+										</div>
+										<div class="more-info">
+											<h1>Dados</h1>
+											<div class="coords">
+												<span><%= data[i].anosFormacao %> Anos</span>
+												<span>Desde <%= data[i].dataCriacao %></span>
+											</div>
+											<div class="coords">
+												<span><%= data[i].cidadeLocalizacao %></span>
+												<span>Unidade <%= data[i].unidade %></span>
+											</div>
+											<div class="stats">
+												<div>
+													<div class="title">Prêmios</div>
+													<i class="fa fa-trophy"></i>
+													<div class="value"><%= data[i].numeroPremios %></div>
+												</div>
+												<div>
+													<div class="title">Favs</div>
+													<i class="fa fa-heart"></i>
+													<div class="value"><%= data[i].curtidas %></div>
+												</div>
+												<div>
+													<div class="title">Avaliacões</div>
+													<i class="fa fa-group"></i>
+													<div class="value"><%= data[i].numeroAvaliacoes %></div>
+												</div>
+												<div>
+													<div class="title">Aprovado</div>
+													<i class="fa fa-thumbs-up"></i>
+													<div class="value"><%= data[i].porcentagemAprovacao %> %</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="general">
+										<h3 style="padding-top: 10px;"><strong><%= data[i].nome %></strong></h3>
+										<p style="text-wrap: wrap;"><%= data[i].descricao %></p>
+										<span class="more">Mouse over the card for more info</span>
+									</div>
+								</div>
+							</a>
+						</div><% } %>
+						<% if (i+1 < data.length) { %>
+						<div class="col-xl-6 displaycard">
+							<a href="#" target="_blank" style="color: black;">
+								<div class="card">
+									<div class="additional">
+										<div class="user-card">
+											<div class="level center">
+											<%
+												let totalstars = Math.round(data[i+1].mediaGeral * 2)/2;
+												let fullstars = Math.floor(totalstars);
+												let halfstars = totalstars - fullstars;
+												let emptystars = 5 - Math.ceil(totalstars);
+											%>
+											<% for (let j=0; j < fullstars; j ++) { %>
+												<span class="fa fa-star checked"></span>
+											<% } %>
+											<% if (halfstars > 0) { %>
+												<span class="fa fa-star-half-o checked"></span>
+											<% } %>
+											<% for (let j=0; j < emptystars ; j ++) { %>
+												<span class="fa fa-star"></span>
+											<% } %>
+											</div>
+											<img class="cardpic" src="<%= data[i+1].foto %>" style="max-width: 110px; max-height: 110px; position:relative; margin-top: 70px; margin-left: 20px; border-radius:50%">
+											<div class="points center">
+												<%= data[i+1].numeroAvaliacoes %> Avaliacões
+											</div>
+										</div>
+										<div class="more-info">
+											<h1>Dados</h1>
+											<div class="coords">
+												<span><%= data[i+1].anosFormacao %> Anos</span>
+												<span>Desde <%= data[i+1].dataCriacao %></span>
+											</div>
+											<div class="coords">
+												<span><%= data[i+1].cidadeLocalizacao %></span>
+												<span>Unidade <%= data[i+1].unidade %></span>
+											</div>
+											<div class="stats">
+												<div>
+													<div class="title">Prêmios</div>
+													<i class="fa fa-trophy"></i>
+													<div class="value"><%= data[i+1].numeroPremios %></div>
+												</div>
+												<div>
+													<div class="title">Favs</div>
+													<i class="fa fa-heart"></i>
+													<div class="value"><%= data[i+1].curtidas %></div>
+												</div>
+												<div>
+													<div class="title">Avaliacões</div>
+													<i class="fa fa-group"></i>
+													<div class="value"><%= data[i+1].numeroAvaliacoes %></div>
+												</div>
+												<div>
+													<div class="title">Aprovado</div>
+													<i class="fa fa-thumbs-up"></i>
+													<div class="value"><%= data[i+1].porcentagemAprovacao %> %</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="general">
+										<h3 style="padding-top: 10px;"><strong><%= data[i+1].nome %></strong></h3>
+										<p style="text-wrap: wrap;"><%= data[i+1].descricao %></p>
+										<span class="more">Mouse over the card for more info</span>
+									</div>
+								</div>
+							</a>
+						</div>
+						<% } %>
+					</div>
+				<% } %>
+				<div>
+				
+
+			</div>
+		</div>
+
+		<div class="col-xxxl-8 container-fluid" style="display: inline-block; max-width:max-content">
+			<div class="rankingframe">
+				<h1>CURSOS</h1>
+				<hr>
 				<div class="row rankingrow">
 					<div class="col-xl-6 displaycard">
 						<a href="#" target="_blank" style="color: black;">

@@ -22,8 +22,19 @@ class IndexRoute {
 	}
 
 	public async cursos(req: app.Request, res: app.Response) {
+		let sqlCursos: any[];
+
+		await app.sql.connect(async (sql) => {
+
+			// Todas os comandos SQL devem ser executados aqui dentro do app.sql.connect().
+
+			sqlCursos = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso");
+
+		});
+
 		let opcoes = {
-			titulo: "Cursos"
+			titulo: "Cursos",
+			data: sqlCursos
 		};
 
 		res.render("index/cat_cursos", opcoes);
