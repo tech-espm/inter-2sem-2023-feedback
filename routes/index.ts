@@ -28,8 +28,8 @@ class IndexRoute {
             melhorApr1 = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaAproveitamento FROM curso ORDER BY mediaNotaAproveitamento DESC LIMIT 1");
             melhorEmp = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaEmpregabilidade FROM curso ORDER BY mediaNotaEmpregabilidade DESC LIMIT 1");
             melhorApr2 = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaAprendizado FROM curso ORDER BY mediaNotaAprendizado DESC LIMIT 1");
-        
-        });
+
+		});
         let opcoes = {
             titulo: "Cursos",
             data: sqlCursos,
@@ -47,11 +47,20 @@ class IndexRoute {
 	}
 
 	public async profs(req: app.Request, res: app.Response) {
-		let opcoes = {
-			titulo: "Professores"
-		};
-
-		res.render("index/cat_profs", opcoes);
+		let sqlProfs, melhorMet, melhorCom, melhorQua, melhores3;
+        await app.sql.connect(async (sql) => {
+            sqlProfs = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroMaterias, dataContratacao, cargo, areaAtuacao, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM professor");
+            melhorMet = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroMaterias, dataContratacao, cargo, areaAtuacao, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaMetodos FROM professor ORDER BY mediaNotaMetodos DESC LIMIT 1");
+            melhorCom = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroMaterias, dataContratacao, cargo, areaAtuacao, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaCompreensao FROM professor ORDER BY mediaNotaCompreensao DESC LIMIT 1");
+            melhorQua = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroMaterias, dataContratacao, cargo, areaAtuacao, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaQualidade FROM professor ORDER BY mediaNotaQualidade DESC LIMIT 1");
+            
+		});
+        let opcoes = {
+            titulo: "Professores",
+            data: sqlProfs,
+            melhores3: [melhorMet[0], melhorCom[0], melhorQua[0]]
+        };
+        res.render("index/cat_cursos", opcoes);
 	}
 
 	public async avalie(req: app.Request, res: app.Response) {
