@@ -22,22 +22,20 @@ class IndexRoute {
 	}
 
 	public async cursos(req: app.Request, res: app.Response) {
-		let sqlCursos: any[];
-
-		await app.sql.connect(async (sql) => {
-
-			// Todas os comandos SQL devem ser executados aqui dentro do app.sql.connect().
-
-			sqlCursos = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso");
-
-		});
-
-		let opcoes = {
-			titulo: "Cursos",
-			data: sqlCursos
-		};
-
-		res.render("index/cat_cursos", opcoes);
+		let sqlCursos, melhorApr1, melhorEmp, melhorApr2, melhores3;
+        await app.sql.connect(async (sql) => {
+            sqlCursos = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso");
+            melhorApr1 = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaAproveitamento FROM curso ORDER BY mediaNotaAproveitamento DESC LIMIT 1");
+            melhorEmp = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaEmpregabilidade FROM curso ORDER BY mediaNotaEmpregabilidade DESC LIMIT 1");
+            melhorApr2 = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaAprendizado FROM curso ORDER BY mediaNotaAprendizado DESC LIMIT 1");
+        
+        });
+        let opcoes = {
+            titulo: "Cursos",
+            data: sqlCursos,
+            melhores3: [melhorApr1[0], melhorEmp[0], melhorApr2[0]]
+        };
+        res.render("index/cat_cursos", opcoes);
 	}
 
 	public async materias(req: app.Request, res: app.Response) {
