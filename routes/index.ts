@@ -60,7 +60,7 @@ class IndexRoute {
             data: sqlProfs,
             melhores3: [melhorMet[0], melhorCom[0], melhorQua[0]]
         };
-        res.render("index/cat_cursos", opcoes);
+        res.render("index/cat_profs", opcoes);
 	}
 
 	public async avalie(req: app.Request, res: app.Response) {
