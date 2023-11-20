@@ -121,13 +121,13 @@
 			<div class="proftitle">
 				<h4>Nome</h4>
 				<h6>Opcional</h6>
-				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Nome">
+				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Nome" id="nome">
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="proftitle">
 				<h4 id="sendtxt">Enviar</h4>
-				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="sendbtn" onclick="ChangeColor(this, 'white')">
+				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="sendbtn" onclick="ChangeColor(this, 'white'), GetNotas()">
 					<span class="fa fa-send send"></span>
 				</button>
 			</div>
@@ -507,4 +507,32 @@
         document.getElementById(txt).innerHTML = (document.getElementById(ele.id).value).toString() + ' ' + star.outerHTML
         console.log('called')
     }
+	function GetNotas() {
+		var notas = []
+		notas.push(document.getElementById('rangeA').value)
+		notas.push(document.getElementById('rangeB').value)
+		notas.push(document.getElementById('rangeC').value)
+		notas.push(document.getElementById('rangeD').value)
+		notas.push(document.getElementById('rangeE').value)
+		notas.push(document.getElementById('rangeF').value)
+		notas.push(document.getElementById('rangeG').value)
+		notas.push(document.getElementById('rangeH').value)
+		var nome = document.getElementById('nome').value
+		var obs = document.getElementById('obs').value
+		var like = document.getElementById('likebtn').style.color
+		var curtida
+		if (like == 'red') {
+			curtida = true
+		} else {
+			curtida = false
+		}
+		var avaliacao = {
+			'nome': nome,
+			'notas': notas,
+			'obs': obs,
+			'curtida': curtida
+		}
+		console.log(avaliacao)
+		return notas
+	}
 </script>

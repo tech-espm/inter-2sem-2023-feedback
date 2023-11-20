@@ -64,6 +64,9 @@ class IndexRoute {
 	}
 
 	public async avalie(req: app.Request, res: app.Response) {
+		await app.sql.connect(async (sql) => {
+            
+		});
 		let opcoes = {
 			titulo: "Avaliar"
 		};
