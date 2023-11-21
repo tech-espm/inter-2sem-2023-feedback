@@ -12,72 +12,30 @@
 	<div class="top5row" style="align-items: center;">
 		<div class="top5table">
 			<h3 style="text-align: center; margin-top:20px"><strong>CURSOS</strong></h4>
-			<div class="top5rank">
-				<div class="top5cardnum">1</div>
-				<div class="top5card">Sistemas de Informação</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">2</div>
-				<div class="top5card">Direito</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">3</div>
-				<div class="top5card">Relações Internacionais</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">4</div>
-				<div class="top5card">Publicidade & Propaganda</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">5</div>
-				<div class="top5card">Cinema</div>
-			</div>
+			<% for (let i=0; i < top.cursos.length; i++) { %>
+				<div class="top5rank">
+					<div class="top5cardnum"><%= i + 1 %></div>
+					<div class="top5card"><%= top.cursos[i].nome %></div>
+				</div>
+			<% } %>
 		</div>
 		<div class="top5table">
 			<h3 style="text-align: center; margin-top:20px"><strong>MATÉRIAS</strong></h4>
-			<div class="top5rank">
-				<div class="top5cardnum">1</div>
-				<div class="top5card">Projeto Interdisciplinar II</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">2</div>
-				<div class="top5card">Lab. de Programação</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">3</div>
-				<div class="top5card">Arquitetura</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">4</div>
-				<div class="top5card">LL02 Criatividade</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">5</div>
-				<div class="top5card">Fundamentos de Marketing</div>
-			</div>
+			<% for (let i=0; i < top.materias.length; i++) { %>
+				<div class="top5rank">
+					<div class="top5cardnum"><%= i + 1 %></div>
+					<div class="top5card"><%= top.materias[i].nome %></div>
+				</div>
+			<% } %>
 		</div>
 		<div class="top5table">
 			<h3 style="text-align: center; margin-top:20px"><strong>PROFESSORES</strong></h4>
-			<div class="top5rank">
-				<div class="top5cardnum">1</div>
-				<div class="top5card">Carlos Rafael</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">2</div>
-				<div class="top5card">Rafa</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">3</div>
-				<div class="top5card">Rafael</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">4</div>
-				<div class="top5card">Carlos</div>
-			</div>
-			<div class="top5rank">
-				<div class="top5cardnum">5</div>
-				<div class="top5card">Seu Mini</div>
-			</div>
+			<% for (let i=0; i < top.professores.length; i++) { %>
+				<div class="top5rank">
+					<div class="top5cardnum"><%= i + 1 %></div>
+					<div class="top5card"><%= top.professores[i].nome %></div>
+				</div>
+			<% } %>
 		</div>
 	</div>
 </div>

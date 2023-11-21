@@ -2,7 +2,22 @@
 
 class IndexRoute {
 	public async index(req: app.Request, res: app.Response) {
-		res.render("index/index");
+		let t5c, t5m, t5p, top
+        await app.sql.connect(async (sql) => {
+            t5c = await sql.query("SELECT id, nome, mediaGeral FROM curso ORDER BY mediaGeral DESC LIMIT 5");
+			t5m = await sql.query("SELECT id, nome, mediaGeral FROM materia ORDER BY mediaGeral DESC LIMIT 5");
+			t5p = await sql.query("SELECT id, nome, mediaGeral FROM professor ORDER BY mediaGeral DESC LIMIT 5");
+
+		});
+        let opcoes = {
+            titulo: "Home",
+			top: {
+				cursos: t5c,
+				materias: t5m,
+				professores: t5p
+			}
+        };
+		res.render("index/index", opcoes);
 	}
 
 	public async sobre(req: app.Request, res: app.Response) {
