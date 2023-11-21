@@ -54,8 +54,18 @@ class IndexRoute {
 	}
 
 	public async materias(req: app.Request, res: app.Response) {
+		let sqlMats, melhorCon, melhorEst, melhorApr, melhores3;
+        await app.sql.connect(async (sql) => {
+            sqlMats = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM materia");
+            melhorCon = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaConteudo FROM materia ORDER BY mediaNotaConteudo DESC LIMIT 1");
+            melhorEst = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaEstrutura FROM materia ORDER BY mediaNotaEstrutura DESC LIMIT 1");
+            melhorApr = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao, mediaNotaAprendizado FROM materia ORDER BY mediaNotaAprendizado DESC LIMIT 1");
+             
+		});
 		let opcoes = {
-			titulo: "Matérias"
+			titulo: "Matérias",
+			data: sqlMats,
+			melhores3: [melhorCon[0], melhorEst[0], melhorApr[0]]
 		};
 
 		res.render("index/cat_materias", opcoes);
@@ -79,8 +89,9 @@ class IndexRoute {
 	}
 
 	public async avalie(req: app.Request, res: app.Response) {
+		let avaliado
 		await app.sql.connect(async (sql) => {
-            
+
 		});
 		let opcoes = {
 			titulo: "Avaliar"

@@ -520,7 +520,7 @@
 		var nome = document.getElementById('nome').value
 		var obs = document.getElementById('obs').value
 		var like = document.getElementById('likebtn').style.color
-		var curtida
+		var curtida, coisa
 		if (like == 'red') {
 			curtida = true
 		} else {
@@ -533,6 +533,6 @@
 			'curtida': curtida
 		}
 		console.log(avaliacao)
-		return notas
+		return avaliacao
 	}
 </script>
