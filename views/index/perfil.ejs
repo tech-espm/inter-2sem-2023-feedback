@@ -83,16 +83,16 @@ console.log(notaCats)
 </div>
 
 <div style="text-align: center; padding:20px">
-    <h3><%= perfil.numeroAvaliacoes %></h3>
+    <h3><%= perfil.numeroAvaliacoes %> Avaliacões</h3>
     <div class="profreviews">
         <div class="container-fluid">
-            <%= for (let k = 0; k < avaliacoes.length; k++) { %>
+            <% for (let k = 0; k < avaliacoes.length; k++) { %>
             <div class="row review">
                 <div class="col-lg-5">
                     <p class="reviewname"><%= avaliacoes[k].nome %></p>
-                    <%= if (avaliacoes[k].semestreOpcional != 0) && (avaliacoes[k].cursoOpcional != 'Nenhum') { %>
+                    <% if ((avaliacoes[k].semestreOpcional != 0) && (avaliacoes[k].cursoOpcional != 'Nenhum')) { %>
                     <p class="reviewcat"><%= avaliacoes[k].semestreOpcional %>o Semestre - <%= avaliacoes[k].cursoOpcional %></p>
-                    <%= } %>
+                    <% } %>
                 </div>
                 <div class="col-lg-3">
                     <%
@@ -120,7 +120,7 @@ console.log(notaCats)
                 </div>
             </div>
             <hr>
-            <%= } %>
+            <% } %>
         </div>
     </div>
 </div>
