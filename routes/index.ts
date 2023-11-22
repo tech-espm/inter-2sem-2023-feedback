@@ -33,41 +33,45 @@ class IndexRoute {
 	public async perfil(req: app.Request, res: app.Response) {
 		let perfil;
 		let tipo;
-		let getid = req.params.objectid;
+		let getid = req.query.id.toString()
 		let id = getid;
 		let data;
+		let avaliacoes;
 
 		console.log(getid)
 		await app.sql.connect(async (sql) => {
-			if (getid.includes("professor")) {
-				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,mediaNotaQualidade,mediaNotaSocial,mediaNotaConteudo,mediaNotaMetodos,mediaNotaHumor,mediaNotaLeniencia,mediaNotaCompreensao,mediaNotaExpectativas,mediaGeral,numeroMaterias,dataContratacao,cargo,areaAtuacao,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM professor WHERE id = ?", [
+			if (getid.includes("prof")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaNotaQualidade, mediaNotaSocial, mediaNotaConteudo, mediaNotaMetodos, mediaNotaHumor, mediaNotaLeniencia, mediaNotaCompreensao,mediaNotaExpectativas,mediaGeral,numeroMaterias,dataContratacao,cargo,areaAtuacao,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM professor WHERE id = ?", [
 				id,
 				]);
 				tipo = 'professor'
 			}
 
-			else if (getid.includes("curso")) {
-				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,coordenador,mediaNotaConforto,mediaNotaEmpregabilidade,mediaNotaDificuldade,mediaNotaCargaHoraria,mediaNotaAmenidades,mediaNotaAproveitamento,mediaNotaAprendizado,mediaNotaExpectativas,mediaGeral,anosFormacao,dataCriacao,cidadeLocalizacao,unidade,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM curso WHERE id = ?", [
-					id,
+			else if (getid.includes("cur")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaNotaConforto, mediaNotaEmpregabilidade, mediaNotaDificuldade, mediaNotaCargaHoraria, mediaNotaAmenidades, mediaNotaAproveitamento, mediaNotaAprendizado, mediaNotaExpectativas, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso WHERE id = ?", [
+					getid,
 				]);
 				tipo = 'curso'
 			}
 
-			else if (getid.includes("materia")) {
-				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,mediaNotaDificuldade,mediaNotaAprendizado,mediaNotaConteudo,mediaNotaCargaHoraria,mediaNotaLocalizacao,mediaNotaEstrutura,mediaNotaImportancia,mediaNotaExpectativas,mediaGeral,numeroCursos,periodo,semestre,modoAula,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM materia WHERE id = ?", [
+			else if (getid.includes("mat")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaNotaDificuldade, mediaNotaAprendizado, mediaNotaConteudo, mediaNotaCargaHoraria, mediaNotaLocalizacao, mediaNotaEstrutura, mediaNotaImportancia, mediaNotaExpectativas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM materia WHERE id = ?", [
 					id,
 				]);
 				tipo ='materia'
 			}
+
+			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refid = ?", [id]);
 		});
 
 		let opcoes = {
 			titulo: "Perfil",
-			perfil: data,
-			tipo: tipo
+			perfil: data[0],
+			tipo: tipo,
+			avaliacoes: avaliacoes
 		};
 
-		res.render("index/perfil", opcoes);
+		res.render('index/perfil', opcoes);
 	}
 
 

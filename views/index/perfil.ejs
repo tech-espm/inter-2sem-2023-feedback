@@ -1,23 +1,28 @@
 <% 
 let nomeNotas = []
 let notaCats = []
-
-if (tipo == 'professor') { 
+let ids = perfil.id.toString()
+let tipo
+console.log(perfil)
+if (ids.includes('prof')) { 
     nomeNotas = ['Qualidade', 'Social', 'Conteúdo', 'Métodos', 'Humor', 'Leniência', 'Compreensão', 'Expectativas']
     notaCats = [perfil.mediaNotaQualidade, perfil.mediaNotaSocial, perfil.mediaNotaConteudo, perfil.mediaNotaMetodos, perfil.mediaNotaHumor, perfil.mediaNotaLeniencia, perfil.mediaNotaCompreensao, perfil.mediaNotaExpectativas]
+    tipo = 'Professor'
 }
-else if (tipo == 'materia') {
+else if (ids.includes('mat')) {
     nomeNotas = ['Dificuldade', 'Aprendizado', 'Conteúdo', 'Carga Horária', 'Localização', 'Estrutura', 'Importância', 'Expectativas']
     notaCats = [perfil.mediaNotaDificuldade, perfil.mediaNotaAprendizado, perfil.mediaNotaConteudo, perfil.mediaNotaCargaHoraria, perfil.mediaNotaLocalizacao, perfil.mediaNotaEstrutura, perfil.mediaNotaImportancia, perfil.mediaNotaExpectativas]
+    tipo = 'Matéria'
 }
-else if (tipo == 'curso') {
+else if (ids.includes('cur')) {
     nomeNotas = ['Conforto', 'Empregabilidade', 'Dificuldade', 'Carga Horária', 'Amenidades', 'Aproveitamento', 'Aprendizado', 'Expectativas']
-    notaCats = [perfil[0].mediaNotaConforto, perfil.mediaNotaEmpregabilidade, perfil.mediaNotaDificuldade, perfil.mediaNotaCargaHoraria, perfil.mediaNotaAmenidades, perfil.mediaNotaAproveitamento, perfil.mediaNotaAprendizado, perfil.mediaNotaExpectativas]
+    notaCats = [perfil.mediaNotaConforto.toFixed(1), perfil.mediaNotaEmpregabilidade.toFixed(1), perfil.mediaNotaDificuldade.toFixed(1), perfil.mediaNotaCargaHoraria.toFixed(1), perfil.mediaNotaAmenidades.toFixed(1), perfil.mediaNotaAproveitamento.toFixed(1), perfil.mediaNotaAprendizado.toFixed(1), perfil.mediaNotaExpectativas.toFixed(1)]
+    tipo = 'Curso'
 }
-console.log(notaCats)
 console.log(tipo)
+console.log(nomeNotas)
+console.log(notaCats)
 %>
-    
 
 <h1 style="text-align:center"><%= tipo %> - <%= perfil.nome %></h1>
 <div class="container-fluid" style="text-align: center; align-items:center;">
@@ -25,69 +30,25 @@ console.log(tipo)
         <div class="col-lg-4">
             <div class="profover">
                 <img src="https://avatars.githubusercontent.com/u/49880458?s=280&amp;v=4" class="profimg">
-                <h1><%= perfil.mediaGeral %></h1>
+                <h1><%= perfil.mediaGeral.toFixed(1) %></h1>
                 <h6>Geral</h6>
             </div>
         </div>
         <div class="col-lg-8">
             <div class="profpoints">
                 <div class="container-fluid">
+                    <% for (let i = 0; i < 4; i++) { %>
                     <div class="row">
+                        <% for (let j = 0; j < 2; j++) { %>
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[0] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[0] %></h4>
+                                <h4 class="profcatname"><%= nomeNotas[(i*2) + j] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[(i*2) + j] %></h4>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[1] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[1] %></h4>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[2] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[2] %></h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[3] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[3] %></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[4] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[4] %></h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[5] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[5] %></h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[6] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[6] %></h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[7] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[7] %></h4>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
@@ -117,136 +78,49 @@ console.log(tipo)
 <div style="text-align: center; padding:20px">
     <h3>Sobre</h3>
     <div class="profsobre">
-        <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque quam vero fuga eaque velit temporibus. Placeat quas, alias temporibus at nemo totam hic quibusdam suscipit beatae dolore aliquid eveniet numquam! Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque illo delectus minus molestias neque possimus architecto voluptate eum voluptates doloremque. Ipsum dicta a perferendis architecto unde repellat distinctio, porro officiis.</h5>
+        <h5><%= perfil.descricao %></h5>
     </div>
 </div>
 
 <div style="text-align: center; padding:20px">
-    <h3>2409 AVALIAÇÕES</h3>
+    <h3><%= perfil.numeroAvaliacoes %></h3>
     <div class="profreviews">
         <div class="container-fluid">
+            <%= for (let k = 0; k < avaliacoes.length; k++) { %>
             <div class="row review">
                 <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
+                    <p class="reviewname"><%= avaliacoes[k].nome %></p>
+                    <%= if (avaliacoes[k].semestreOpcional != 0) && (avaliacoes[k].cursoOpcional != 'Nenhum') { %>
+                    <p class="reviewcat"><%= avaliacoes[k].semestreOpcional %>o Semestre - <%= avaliacoes[k].cursoOpcional %></p>
+                    <%= } %>
                 </div>
                 <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+                    <%
+                        let mediaAvalia = parseFloat((parseFloat(avaliacoes[k].nota1) + parseFloat(avaliacoes[k].nota2) + parseFloat(avaliacoes[k].nota3) + parseFloat(avaliacoes[k].nota4) + parseFloat(avaliacoes[k].nota5) + parseFloat(avaliacoes[k].nota6) + parseFloat(avaliacoes[k].nota7) + parseFloat(avaliacoes[k].nota8))/8).toFixed(2)
+                        totalstars = Math.round(mediaAvalia * 2)/2;
+                        fullstars = Math.floor(totalstars);
+                        halfstars = totalstars - fullstars;
+                        emptystars = 5 - Math.ceil(totalstars);
+                    %>
+                    <% for (let j=0; j < fullstars; j ++) { %>
+                        <span class="fa fa-star checked"></span>
+                    <% } %>
+                    <% if (halfstars > 0) { %>
+                        <span class="fa fa-star-half-o checked"></span>
+                    <% } %>
+                    <% for (let j=0; j < emptystars ; j ++) { %>
+                        <span class="fa fa-star"></span>
+                    <% } %>
                 </div>
                 <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
+                    <h4><%= avaliacoes[k].data %></h4>
                 </div>
                 <div class="col-lg-1">
                     <span class="fa fa-arrow-circle-down"></span>
                 </div>
             </div>
             <hr>
-            <div class="row review">
-                <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
-                </div>
-                <div class="col-lg-1">
-                    <span class="fa fa-arrow-circle-down"></span>
-                </div>
-            </div>
-            <hr>
-            <div class="row review">
-                <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
-                </div>
-                <div class="col-lg-1">
-                    <span class="fa fa-arrow-circle-down"></span>
-                </div>
-            </div>
-            <hr>
-            <div class="row review">
-                <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
-                </div>
-                <div class="col-lg-1">
-                    <span class="fa fa-arrow-circle-down"></span>
-                </div>
-            </div>
-            <hr>
-            <div class="row review">
-                <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
-                </div>
-                <div class="col-lg-1">
-                    <span class="fa fa-arrow-circle-down"></span>
-                </div>
-            </div>
-            <hr>
-            <div class="row review">
-                <div class="col-lg-5">
-                    <p class="reviewname">Paulo Silva</p>
-                    <p class="reviewcat">2o Semestre - Publicidade</p>
-                </div>
-                <div class="col-lg-3">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <div class="col-lg-3">
-                    <h4>01/11/2023</h4>
-                </div>
-                <div class="col-lg-1">
-                    <span class="fa fa-arrow-circle-down" onclick="ExpandContent(this, 'reviewtxt6')"></span>
-                </div>
-                <div class="row reviewtext" id="reviewtxt6" hidden="true">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae quisquam obcaecati aliquam illo enim ipsum voluptas id error, corporis odio veniam esse beatae dolor cumque veritatis dignissimos, vero magni quod?</p>
-                </div>
-            </div>
+            <%= } %>
         </div>
     </div>
 </div>
