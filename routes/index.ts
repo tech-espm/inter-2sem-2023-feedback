@@ -128,17 +128,91 @@ class IndexRoute {
 	}
 
 	public async avalie(req: app.Request, res: app.Response) {
-		let avaliado
-		await app.sql.connect(async (sql) => {
+		let avaliado;
+		let tipo;
+		let getid = req.query.id.toString();
+		let id = getid;
+		let data;
+		let avaliacoes;
 
+		console.log(getid);
+		await app.sql.connect(async (sql) => {
+			if (getid.includes("prof")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaNotaQualidade, mediaNotaSocial, mediaNotaConteudo, mediaNotaMetodos, mediaNotaHumor, mediaNotaLeniencia, mediaNotaCompreensao,mediaNotaExpectativas,mediaGeral,numeroMaterias,dataContratacao,cargo,areaAtuacao,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM professor WHERE id = ?", [
+					id,
+				]);
+				tipo = 'professor';
+			} else if (getid.includes("cur")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaNotaConforto, mediaNotaEmpregabilidade, mediaNotaDificuldade, mediaNotaCargaHoraria, mediaNotaAmenidades, mediaNotaAproveitamento, mediaNotaAprendizado, mediaNotaExpectativas, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso WHERE id = ?", [
+					getid,
+				]);
+				tipo = 'curso';
+			} else if (getid.includes("mat")) {
+				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, mediaNotaDificuldade, mediaNotaAprendizado, mediaNotaConteudo, mediaNotaCargaHoraria, mediaNotaLocalizacao, mediaNotaEstrutura, mediaNotaImportancia, mediaNotaExpectativas, mediaGeral, numeroCursos, periodo, semestre, modoAula, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM materia WHERE id = ?", [
+					id,
+				]);
+				tipo = 'materia';
+			}
+
+			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refid = ?", [id]);
 		});
+
 		let opcoes = {
-			titulo: "Avaliar"
+			titulo: "Avaliar",
+			avaliado: data[0],
+			tipo: tipo,
+			avaliacoes: avaliacoes
 		};
 
-		res.render("index/avaliar", opcoes);
+		res.render('index/avaliar', opcoes);
 	}
 
+	public async enviado(req: app.Request, res: app.Response) {
+		let getav = req.query.av.toString()
+		let avaliacao = JSON.parse(getav);
+
+		await app.sql.connect(async (sql) => {
+			await sql.query("INSERT INTO avaliacao (refid, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, curtida, data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+				avaliacao.avidref,
+				avaliacao.avobs,
+				avaliacao.avnome,
+				avaliacao.avcurso,
+				avaliacao.avsemestre,
+				avaliacao.avnota1,
+				avaliacao.avnota2,
+				avaliacao.avnota3,
+				avaliacao.avnota4,
+				avaliacao.avnota5,
+				avaliacao.avnota6,
+				avaliacao.avnota7,
+				avaliacao.avnota8,
+				avaliacao.avcurtida,
+				avaliacao.avdata
+			]);
+
+			let notaProfs = ["mediaNotaQualidade", "mediaNotaSocial", "mediaNotaConteudo", "mediaNotaMetodos", "mediaNotaHumor", "mediaNotaLeniencia", "mediaNotaCompreensao", "mediaNotaExpectativas"]
+			let notaMats = ["mediaNotaDificuldade", "mediaNotaAprendizado", "mediaNotaConteudo", "mediaNotaCargaHoraria", "mediaNotaLocalizacao", "mediaNotaEstrutura", "mediaNotaImportancia", "mediaNotaExpectativas"]
+			let notaCurs = ["mediaNotaConforto", "mediaNotaEmpregabilidade", "mediaNotaDificuldade", "mediaNotaCargaHoraria", "mediaNotaAmenidades", "mediaNotaAproveitamento", "mediaNotaAprendizado", "mediaNotaExpectativas"]
+			let tables = ['professor', 'materia', 'curso']
+			let notas = [notaProfs, notaMats, notaCurs]
+			
+			for (let k = 0; k < tables.length; k++) {
+				let table = tables[k];
+				for (let l = 1; l < 9; l++) {
+					let notaAtual = notas[k][l-1];
+					await sql.query(`UPDATE ${table} SET ${notaAtual} = (SELECT AVG(nota${l}) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
+				}
+			}
+		});
+
+		let opcoes = {
+			titulo: "Enviado",
+			avaliacao: avaliacao
+		};
+
+		res.render('index/enviado', opcoes);
+	}
+	
 	public async produtos(req: app.Request, res: app.Response) {
 		let produtoA = {
 			id: 1,

@@ -16,7 +16,7 @@ else if (ids.includes('mat')) {
 }
 else if (ids.includes('cur')) {
     nomeNotas = ['Conforto', 'Empregabilidade', 'Dificuldade', 'Carga Horária', 'Amenidades', 'Aproveitamento', 'Aprendizado', 'Expectativas']
-    notaCats = [perfil.mediaNotaConforto.toFixed(1), perfil.mediaNotaEmpregabilidade.toFixed(1), perfil.mediaNotaDificuldade.toFixed(1), perfil.mediaNotaCargaHoraria.toFixed(1), perfil.mediaNotaAmenidades.toFixed(1), perfil.mediaNotaAproveitamento.toFixed(1), perfil.mediaNotaAprendizado.toFixed(1), perfil.mediaNotaExpectativas.toFixed(1)]
+    notaCats = [perfil.mediaNotaConforto, perfil.mediaNotaEmpregabilidade, perfil.mediaNotaDificuldade, perfil.mediaNotaCargaHoraria, perfil.mediaNotaAmenidades, perfil.mediaNotaAproveitamento, perfil.mediaNotaAprendizado, perfil.mediaNotaExpectativas]
     tipo = 'Curso'
 }
 console.log(tipo)
@@ -43,7 +43,7 @@ console.log(notaCats)
                         <div class="col-lg-6">
                             <div class="profcat">
                                 <h4 class="profcatname"><%= nomeNotas[(i*2) + j] %></h4>
-                                <h4 class="profcatrating"><%= notaCats[(i*2) + j] %></h4>
+                                <h4 class="profcatrating"><%= parseFloat(notaCats[(i*2) + j]).toFixed(1) %></h4>
                             </div>
                         </div>
                         <% } %>
@@ -73,7 +73,7 @@ console.log(notaCats)
 </div>
 
 <div class="profbtn">
-    <a href="/avalie" style="margin: auto; width:max-content; background-color:transparent; border: none; color:white"><h3>AVALIAR</h3></a>
+    <a href="#" onclick="sendData('<%= ids %>')" style="margin: auto; width:max-content; background-color:transparent; border: none; color:white"><h3>AVALIAR</h3></a>
 </div>
 <div style="text-align: center; padding:20px">
     <h3>Sobre</h3>
@@ -89,14 +89,15 @@ console.log(notaCats)
             <% for (let k = 0; k < avaliacoes.length; k++) { %>
             <div class="row review">
                 <div class="col-lg-5">
-                    <p class="reviewname"><%= avaliacoes[k].nome %></p>
+                    <p class="reviewname"><%= avaliacoes[k].nomeOpcional %></p>
                     <% if ((avaliacoes[k].semestreOpcional != 0) && (avaliacoes[k].cursoOpcional != 'Nenhum')) { %>
                     <p class="reviewcat"><%= avaliacoes[k].semestreOpcional %>o Semestre - <%= avaliacoes[k].cursoOpcional %></p>
                     <% } %>
                 </div>
                 <div class="col-lg-3">
                     <%
-                        let mediaAvalia = parseFloat((parseFloat(avaliacoes[k].nota1) + parseFloat(avaliacoes[k].nota2) + parseFloat(avaliacoes[k].nota3) + parseFloat(avaliacoes[k].nota4) + parseFloat(avaliacoes[k].nota5) + parseFloat(avaliacoes[k].nota6) + parseFloat(avaliacoes[k].nota7) + parseFloat(avaliacoes[k].nota8))/8).toFixed(2)
+                        let mediaAvalia = parseFloat((parseFloat(avaliacoes[k].nota1) + parseFloat(avaliacoes[k].nota2) + parseFloat(avaliacoes[k].nota3) + parseFloat(avaliacoes[k].nota4) + parseFloat(avaliacoes[k].nota5) + parseFloat(avaliacoes[k].nota6) + parseFloat(avaliacoes[k].nota7) + parseFloat(avaliacoes[k].nota8))/8)
+                        if (mediaAvalia == NaN) {mediaAvalia = 2.5}
                         totalstars = Math.round(mediaAvalia * 2)/2;
                         fullstars = Math.floor(totalstars);
                         halfstars = totalstars - fullstars;
@@ -279,4 +280,7 @@ console.log(notaCats)
             document.getElementById(txtele).hidden = true;
         }
     }
+    function sendData(id) {
+		window.location.href = "/avalie?id=" + id;
+	}
 </script>

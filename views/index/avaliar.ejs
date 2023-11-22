@@ -1,18 +1,43 @@
+<% 
+let nomeNotas = []
+let notaCats = []
+let ids = avaliado.id.toString()
+let tipo
+if (ids.includes('prof')) { 
+    nomeNotas = ['Qualidade', 'Social', 'Conteúdo', 'Métodos', 'Humor', 'Leniência', 'Compreensão', 'Expectativas']
+    notaCats = [avaliado.mediaNotaQualidade, avaliado.mediaNotaSocial, avaliado.mediaNotaConteudo, avaliado.mediaNotaMetodos, avaliado.mediaNotaHumor, avaliado.mediaNotaLeniencia, avaliado.mediaNotaCompreensao, avaliado.mediaNotaExpectativas]
+    tipo = 'Professor'
+}
+else if (ids.includes('mat')) {
+    nomeNotas = ['Dificuldade', 'Aprendizado', 'Conteúdo', 'Carga Horária', 'Localização', 'Estrutura', 'Importância', 'Expectativas']
+    notaCats = [avaliado.mediaNotaDificuldade, avaliado.mediaNotaAprendizado, avaliado.mediaNotaConteudo, avaliado.mediaNotaCargaHoraria, avaliado.mediaNotaLocalizacao, avaliado.mediaNotaEstrutura, avaliado.mediaNotaImportancia, avaliado.mediaNotaExpectativas]
+    tipo = 'Matéria'
+}
+else if (ids.includes('cur')) {
+    nomeNotas = ['Conforto', 'Empregabilidade', 'Dificuldade', 'Carga Horária', 'Amenidades', 'Aproveitamento', 'Aprendizado', 'Expectativas']
+    notaCats = [avaliado.mediaNotaConforto, avaliado.mediaNotaEmpregabilidade, avaliado.mediaNotaDificuldade, avaliado.mediaNotaCargaHoraria, avaliado.mediaNotaAmenidades, avaliado.mediaNotaAproveitamento, avaliado.mediaNotaAprendizado, avaliado.mediaNotaExpectativas]
+    tipo = 'Curso'
+}
+console.log(tipo)
+console.log(nomeNotas)
+console.log(notaCats)
+%>
+
 <span class="fa fa-star" id="star" hidden="true"></span>
 <h1 style="text-align: center;">AVALIAR</h1>
 
 <br>
 
-<h1 style="text-align:center">Curso - Sistemas de Informação</h1>
+<h1 style="text-align:center"><%= tipo %> - <%= avaliado.nome %></h1>
 <div class="container-fluid" style="text-align: center; align-items:center;">
 	<div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
 		<div class="col-lg-4">
 			<div style="width: max-content; margin: 20px auto;">
 				<div style="min-width:max-content">
 					<div class="profover">
-						<img src="https://avatars.githubusercontent.com/u/49880458?s=280&amp;v=4" class="profimg">
-						<h1>4.6</h1>
-						<h6>Qualidade Geral</h6>
+						<img src="<%= avaliado.foto %>" class="profimg">
+						<h1><%= avaliado.mediaGeral %></h1>
+						<h6>Geral</h6>
 					</div>
 					<div class="profover" style="margin-top: 20px;">
 						<h4>Observações</h4>
@@ -24,86 +49,23 @@
 		<div class="col-lg-8">
 			<div class="profpoints">
 				<div class="container-fluid">
+					<% let letters = ['ratxt', 'rbtxt', 'rctxt', 'rdtxt', 'retxt', 'rftxt', 'rgtxt', 'rhtxt'] %>
+					<% let ranges = ['rangeA', 'rangeB', 'rangeC', 'rangeD', 'rangeE', 'rangeF', 'rangeG', 'rangeH'] %>
+					<% for (let i=0; i<4; i++) { %>
 					<div class="row">
+						<% for (let j=0; j<2; j++) { %>
 						<div class="col-lg-6">
 							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
+								<h4 class="profcatname"><%= nomeNotas[(i*2) + j] %></h4>
 								<h4 class="profcatrating" style="display: block;">
-									<p id="ratxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeA" oninput="UpdateRange(this, 'ratxt')">
+									<p id="<%= letters[(i*2) + j] %>">2.5 <span class="fa fa-star"></span></p>
+									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="<%= ranges[(i*2) + j] %>" oninput="UpdateRange(this, '<%= letters[(i*2) + j] %>')">
 								</h4>
 							</div>
 						</div>
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rbtxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeB" oninput="UpdateRange(this, 'rbtxt')">
-								</h4>
-							</div>
-						</div>
+						<% } %>
 					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rctxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeC" oninput="UpdateRange(this, 'rctxt')">
-								</h4>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rdtxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeD" oninput="UpdateRange(this, 'rdtxt')">
-								</h4>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="retxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeE" oninput="UpdateRange(this, 'retxt')">
-								</h4>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rftxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeF" oninput="UpdateRange(this, 'rftxt')">
-								</h4>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rgtxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeG" oninput="UpdateRange(this, 'rgtxt')">
-								</h4>
-							</div>
-						</div>
-						<div class="col-lg-6">
-							<div class="profcat" style="display:contents;">
-								<h4 class="profcatname">Entidades</h4>
-								<h4 class="profcatrating" style="display: block;">
-									<p id="rhtxt">2.5 <span class="fa fa-star"></span></p>
-									<input type="range" class="form-range" placeholder="2.5" min="0" max="5" step="0.1" id="rangeH" oninput="UpdateRange(this, 'rhtxt')">
-								</h4>
-							</div>
-						</div>
-					</div>
+					<% } %>
 				</div>
 			</div>
 		</div>
@@ -117,17 +79,31 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-sm-6">
+		<div class="col-sm-2">
 			<div class="proftitle">
 				<h4>Nome</h4>
 				<h6>Opcional</h6>
 				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Nome" id="nome">
 			</div>
 		</div>
+		<div class="col-sm-2">
+			<div class="proftitle">
+				<h4>Curso</h4>
+				<h6>Opcional</h6>
+				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Curso" id="curso">
+			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="proftitle">
+				<h4>Semestre</h4>
+				<h6>Opcional</h6>
+				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Semestre" id="semestre">
+			</div>
+		</div>
 		<div class="col-sm-3">
 			<div class="proftitle">
 				<h4 id="sendtxt">Enviar</h4>
-				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="sendbtn" onclick="ChangeColor(this, 'white'), GetNotas()">
+				<button style="border: none; padding:15px; background-color:transparent; font-size:30px" id="sendbtn" onclick="ChangeColor(this, 'white'), SendData(GetNotas('<%= ids %>'))">
 					<span class="fa fa-send send"></span>
 				</button>
 			</div>
@@ -507,32 +483,61 @@
         document.getElementById(txt).innerHTML = (document.getElementById(ele.id).value).toString() + ' ' + star.outerHTML
         console.log('called')
     }
-	function GetNotas() {
-		var notas = []
-		notas.push(document.getElementById('rangeA').value)
-		notas.push(document.getElementById('rangeB').value)
-		notas.push(document.getElementById('rangeC').value)
-		notas.push(document.getElementById('rangeD').value)
-		notas.push(document.getElementById('rangeE').value)
-		notas.push(document.getElementById('rangeF').value)
-		notas.push(document.getElementById('rangeG').value)
-		notas.push(document.getElementById('rangeH').value)
+	function GetNotas(idref) {
+		var nota1 = (document.getElementById('rangeA').value)
+		var nota2 = (document.getElementById('rangeB').value)
+		var nota3 = (document.getElementById('rangeC').value)
+		var nota4 = (document.getElementById('rangeD').value)
+		var nota5 = (document.getElementById('rangeE').value)
+		var nota6 = (document.getElementById('rangeF').value)
+		var nota7 = (document.getElementById('rangeG').value)
+		var nota8 = (document.getElementById('rangeH').value)
 		var nome = document.getElementById('nome').value
+		var curso = document.getElementById('curso').value
+		var semestre = document.getElementById('semestre').value
 		var obs = document.getElementById('obs').value
 		var like = document.getElementById('likebtn').style.color
 		var curtida, coisa
+
+		console.log(idref)
+
 		if (like == 'red') {
-			curtida = true
+			curtida = 1
 		} else {
-			curtida = false
+			curtida = 0
 		}
+
+		const today = new Date();
+		const yyyy = today.getFullYear();
+		let mm = today.getMonth() + 1; // Months start at 0!
+		let dd = today.getDate();
+
+		if (dd < 10) dd = '0' + dd;
+		if (mm < 10) mm = '0' + mm;
+
+		const formattedToday = dd + '/' + mm + '/' + yyyy;
+
 		var avaliacao = {
-			'nome': nome,
-			'notas': notas,
-			'obs': obs,
-			'curtida': curtida
+			avidref: idref,
+			avnome: nome,
+			avcurso: curso,
+			avsemestre: semestre,
+			avnota1: nota1,
+			avnota2: nota2,
+			avnota3: nota3,
+			avnota4: nota4,
+			avnota5: nota5,
+			avnota6: nota6,
+			avnota7: nota7,
+			avnota8: nota8,
+			avobs: obs,
+			avcurtida: curtida,
+			avdata: formattedToday
 		}
 		console.log(avaliacao)
 		return avaliacao
+	}
+	function SendData(av) {
+		window.location.href = "/enviado?av=" + JSON.stringify(av);
 	}
 </script>
