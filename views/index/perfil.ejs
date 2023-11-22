@@ -1,12 +1,32 @@
+<% 
+let nomeNotas = []
+let notaCats = []
 
-<h1 style="text-align:center">Curso - Sistemas de Informação</h1>
+if (tipo == 'professor') { 
+    nomeNotas = ['Qualidade', 'Social', 'Conteúdo', 'Métodos', 'Humor', 'Leniência', 'Compreensão', 'Expectativas']
+    notaCats = [perfil.mediaNotaQualidade, perfil.mediaNotaSocial, perfil.mediaNotaConteudo, perfil.mediaNotaMetodos, perfil.mediaNotaHumor, perfil.mediaNotaLeniencia, perfil.mediaNotaCompreensao, perfil.mediaNotaExpectativas]
+}
+else if (tipo == 'materia') {
+    nomeNotas = ['Dificuldade', 'Aprendizado', 'Conteúdo', 'Carga Horária', 'Localização', 'Estrutura', 'Importância', 'Expectativas']
+    notaCats = [perfil.mediaNotaDificuldade, perfil.mediaNotaAprendizado, perfil.mediaNotaConteudo, perfil.mediaNotaCargaHoraria, perfil.mediaNotaLocalizacao, perfil.mediaNotaEstrutura, perfil.mediaNotaImportancia, perfil.mediaNotaExpectativas]
+}
+else if (tipo == 'curso') {
+    nomeNotas = ['Conforto', 'Empregabilidade', 'Dificuldade', 'Carga Horária', 'Amenidades', 'Aproveitamento', 'Aprendizado', 'Expectativas']
+    notaCats = [perfil[0].mediaNotaConforto, perfil.mediaNotaEmpregabilidade, perfil.mediaNotaDificuldade, perfil.mediaNotaCargaHoraria, perfil.mediaNotaAmenidades, perfil.mediaNotaAproveitamento, perfil.mediaNotaAprendizado, perfil.mediaNotaExpectativas]
+}
+console.log(notaCats)
+console.log(tipo)
+%>
+    
+
+<h1 style="text-align:center"><%= tipo %> - <%= perfil.nome %></h1>
 <div class="container-fluid" style="text-align: center; align-items:center;">
     <div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
         <div class="col-lg-4">
             <div class="profover">
                 <img src="https://avatars.githubusercontent.com/u/49880458?s=280&amp;v=4" class="profimg">
-                <h1>4.6</h1>
-                <h6>Qualidade Geral</h6>
+                <h1><%= perfil.mediaGeral %></h1>
+                <h6>Geral</h6>
             </div>
         </div>
         <div class="col-lg-8">
@@ -15,56 +35,56 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[0] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[0] %></h4>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[1] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[1] %></h4>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[2] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[2] %></h4>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[3] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[3] %></h4>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[4] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[4] %></h4>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="profcat">
-                                <h4 class="profcatname">Entidades</h4>
-                                <h4 class="profcatrating">4.3</h4>
+                                <h4 class="profcatname"><%= nomeNotas[5] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[5] %></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="profcat">
+                                <h4 class="profcatname"><%= nomeNotas[6] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[6] %></h4>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="profcat">
+                                <h4 class="profcatname"><%= nomeNotas[7] %></h4>
+                                <h4 class="profcatrating"><%= notaCats[7] %></h4>
                             </div>
                         </div>
                     </div>

@@ -7,7 +7,7 @@
 				<div class="rankingrow">
 					<h3>Melhor Conteúdo</h3>
 					<div class="rankingcard">
-						<a href="/perfil/<%= melhores3[0].id %>" target="_blank" style="color: black;">
+						<a href="#" onclick="sendData('<%= melhores3[0].id %>')" style="color: black;">
 							<div class="card">
 								<div class="additional">
 									<div class="user-card">
@@ -80,7 +80,7 @@
 				<div class="rankingrow">
 					<h3>Melhor Estrutura</h3>
 					<div class="rankingcard">
-						<a href="/perfil/<%= melhores3[1].id %>" target="_blank" style="color: black;">
+						<a href="#" onclick="sendData('<%= melhores3[1].id %>')" style="color: black;">
 							<div class="card">
 								<div class="additional">
 									<div class="user-card">
@@ -153,7 +153,7 @@
 				<div class="rankingrow">
 					<h3>Melhor Aprendizado</h3>
 					<div class="rankingcard">
-						<a href="/perfil/<%= melhores3[2].id %>" target="_blank" style="color: black;">
+						<a href="#" onclick="sendData('<%= melhores3[2].id %>')" style="color: black;">
 							<div class="card">
 								<div class="additional">
 									<div class="user-card">
@@ -233,7 +233,7 @@
 					<div class="row rankingrow">
 						<% if (i < data.length) { %>
 						<div class="col-xl-6 displaycard">
-							<a href="/perfil/<%= data[i].id %>" target="_blank" style="color: black;">
+							<a href="#" onclick="sendData('<%= data[i].id %>')" style="color: black;">
 								<div class="card">
 									<div class="additional">
 										<div class="user-card">
@@ -303,7 +303,7 @@
 						</div><% } %>
 						<% if (i+1 < data.length) { %>
 						<div class="col-xl-6 displaycard">
-							<a href="/perfil/<%= data[i+1].id %>" target="_blank" style="color: black;">
+							<a href="#" onclick="sendData('<%= data[i+1].id %>')" style="color: black;">
 								<div class="card">
 									<div class="additional">
 										<div class="user-card">
@@ -616,3 +616,10 @@
 		text-align: left;
 	}
 </style>
+
+<%- contentFor("espaco-rodape") %>
+<script>
+	function sendData(id) {
+		window.location.href = "/perfil?id=" + id;
+	}
+</script>

@@ -1,4 +1,5 @@
-﻿import app = require("teem");
+﻿import { get } from "http";
+import app = require("teem");
 
 class IndexRoute {
 	public async index(req: app.Request, res: app.Response) {
@@ -28,13 +29,47 @@ class IndexRoute {
 		res.render("index/sobre", opcoes);
 	}
 
+
 	public async perfil(req: app.Request, res: app.Response) {
+		let perfil;
+		let tipo;
+		let getid = req.params.objectid;
+		let id = getid;
+		let data;
+
+		console.log(getid)
+		await app.sql.connect(async (sql) => {
+			if (getid.includes("professor")) {
+				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,mediaNotaQualidade,mediaNotaSocial,mediaNotaConteudo,mediaNotaMetodos,mediaNotaHumor,mediaNotaLeniencia,mediaNotaCompreensao,mediaNotaExpectativas,mediaGeral,numeroMaterias,dataContratacao,cargo,areaAtuacao,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM professor WHERE id = ?", [
+				id,
+				]);
+				tipo = 'professor'
+			}
+
+			else if (getid.includes("curso")) {
+				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,coordenador,mediaNotaConforto,mediaNotaEmpregabilidade,mediaNotaDificuldade,mediaNotaCargaHoraria,mediaNotaAmenidades,mediaNotaAproveitamento,mediaNotaAprendizado,mediaNotaExpectativas,mediaGeral,anosFormacao,dataCriacao,cidadeLocalizacao,unidade,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM curso WHERE id = ?", [
+					id,
+				]);
+				tipo = 'curso'
+			}
+
+			else if (getid.includes("materia")) {
+				data = await sql.query("SELECT id,nome,foto,descricao,curtidas,mediaNotaDificuldade,mediaNotaAprendizado,mediaNotaConteudo,mediaNotaCargaHoraria,mediaNotaLocalizacao,mediaNotaEstrutura,mediaNotaImportancia,mediaNotaExpectativas,mediaGeral,numeroCursos,periodo,semestre,modoAula,numeroPremios,numeroAvaliacoes,porcentagemAprovacao FROM materia WHERE id = ?", [
+					id,
+				]);
+				tipo ='materia'
+			}
+		});
+
 		let opcoes = {
-			titulo: "Perfil"
+			titulo: "Perfil",
+			perfil: data,
+			tipo: tipo
 		};
 
 		res.render("index/perfil", opcoes);
 	}
+
 
 	public async cursos(req: app.Request, res: app.Response) {
 		let sqlCursos, melhorApr1, melhorEmp, melhorApr2, melhores3;
