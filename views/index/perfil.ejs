@@ -19,6 +19,14 @@ else if (ids.includes('cur')) {
     notaCats = [perfil.mediaNotaConforto, perfil.mediaNotaEmpregabilidade, perfil.mediaNotaDificuldade, perfil.mediaNotaCargaHoraria, perfil.mediaNotaAmenidades, perfil.mediaNotaAproveitamento, perfil.mediaNotaAprendizado, perfil.mediaNotaExpectativas]
     tipo = 'Curso'
 }
+
+let mediaGeral1
+if (perfil.mediaGeral == null) {
+    mediaGeral1 = 2.5
+}
+else {
+    mediaGeral1 = perfil.mediaGeral
+}
 console.log(tipo)
 console.log(nomeNotas)
 console.log(notaCats)
@@ -29,8 +37,8 @@ console.log(notaCats)
     <div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
         <div class="col-lg-4">
             <div class="profover">
-                <img src="https://avatars.githubusercontent.com/u/49880458?s=280&amp;v=4" class="profimg">
-                <h1><%= perfil.mediaGeral.toFixed(1) %></h1>
+                <img src="<%= perfil.foto %>" class="profimg">
+                <h1><%= mediaGeral1.toFixed(1) %></h1>
                 <h6>Geral</h6>
             </div>
         </div>

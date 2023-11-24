@@ -97,7 +97,7 @@ console.log(notaCats)
 			<div class="proftitle">
 				<h4>Semestre</h4>
 				<h6>Opcional</h6>
-				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Semestre" id="semestre">
+				<input type="text" style="border: 1px black; background-color:transparent; border-radius:20px; margin:auto; text-align:center" placeholder="Seu Semestre" id="semestre" value="0">
 			</div>
 		</div>
 		<div class="col-sm-3">
@@ -493,7 +493,7 @@ console.log(notaCats)
 		var nota7 = (document.getElementById('rangeG').value)
 		var nota8 = (document.getElementById('rangeH').value)
 		var nome = document.getElementById('nome').value
-		var curso = document.getElementById('curso').value
+		var curso = parseInt(document.getElementById('curso').value)
 		var semestre = document.getElementById('semestre').value
 		var obs = document.getElementById('obs').value
 		var like = document.getElementById('likebtn').style.color

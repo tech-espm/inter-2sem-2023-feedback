@@ -209,7 +209,7 @@ class IndexRoute {
 				let table = tables[k];
 				await sql.query(`UPDATE ${table} SET curtidas = (SELECT SUM(curtida) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
 				await sql.query(`UPDATE ${table} SET numeroAvaliacoes = (SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
-				await sql.query(`UPDATE ${table} SET porcentagemAprovacao = (SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid AND AVG(avaliacao.nota1, avaliacao.nota2, avaliacao.nota3, avaliacao.nota4, avaliacao.nota5, avaliacao.nota6, avaliacao.nota7, avaliacao.nota8)) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
+				await sql.query(`UPDATE ${table} SET porcentagemAprovacao = (SELECT IF (numeroAvaliacoes > 0, (((SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid AND avaliacao.mediaAvaliacao >= 2.5) * 100) / (SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid)), 50));`)
 			}
 		});
 
