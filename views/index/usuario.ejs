@@ -8,23 +8,25 @@
 <br>
 
 <div class="container-fluid" style="margin-right:0 auto;text-align: center;">
+	<p id="pass" hidden><%= dados.usenha %></p>
+	<p id="ra" hidden><%= dados.ura %></p>
 	<div class="row" style="margin:0 auto; text-align:center;">
 		<div class="col-sm-6" style="margin:0 auto; text-align: center; width: max-content;">
 			<img src="https://www.pngkey.com/png/full/52-523516_empty-profile-picture-circle.png" style="max-width: 150px; max-height: 150px; padding: 20px">
-			<h2><strong>USERNAME</strong></h2>
-			<h4><strong>RA: 123456789</strong></h4>
+			<h2><strong><%= dados.unome %></strong></h2>
+			<h4><strong>RA: <%= dados.ura %></strong></h4>
 		</div>
 		<div class="col-sm-6" style="margin:0 auto; text-align: center; width: max-content;">
 			<h2><strong>Informações</strong></h2>
 			<h4>OPCIONAL</h4>
 			<br>
 			<label for="curso">Curso: </label>
-			<input type="text" name="curso" id="cur">
+			<input type="text" name="curso" id="cur" placeholder="<%= dados.ucurso %>">
 			<br>
 			<label for="semestre">Semestre: </label>
-			<input type="text" name="semestre" id="sem">
+			<input type="number" name="semestre" id="sem" placeholder="<%= dados.usemestre %>">
 			<br>
-			<button><strong>ATUALIZAR</strong></button>
+			<button onclick="update()"><strong>ATUALIZAR</strong></button>
 		</div>
 	</div>
 	<div class="row" style="margin:0 auto; text-align:center;">
@@ -32,4 +34,25 @@
 			<h2><strong>MINHAS AVALIAÇÕES</strong></h2>
 		</div>
 	</div>
+	<% for (let j = 0; j < dados.avaliacoes.length; j++) { %>
+	<di
 </div>
+
+<%- contentFor("espaco-rodape") %>
+<script>
+	function update() {
+		let newcurso = (document.getElementById("cur").value).toString();
+		let newsemestre = parseInt(document.getElementById("sem").value);
+		
+		let logra =  parseInt(document.getElementById("ra").innerHTML);
+		let logsenha = (document.getElementById("pass").innerHTML).toString();
+
+		var ulog = {
+			ra:logra,
+			senha:logsenha,
+			curso:newcurso,
+			semestre:newsemestre
+		};
+		window.location.href = "/usuario?ulog=" + JSON.stringify(ulog);
+	}
+</script>

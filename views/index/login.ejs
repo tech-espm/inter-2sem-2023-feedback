@@ -19,7 +19,7 @@
 			<label for="SENHA">Senha: </label>
 			<input type="text" name="Senha" id="senha">
 			<br>
-			<button>LOGIN</button>
+			<button onclick="Login()">LOGIN</button>
 		</div>
 		<div class="col-sm-6" style="margin:0 auto; text-align: center; width: max-content;">
 			<h2>É novo por aqui?</h2>
@@ -34,7 +34,34 @@
 			<label for="newSENHA">Senha: </label>
 			<input type="text" name="newSenha" id="newsenha">
 			<br>
-			<button>REGISTRAR</button>
+			<button onclick="Registrar()">REGISTRAR</button>
 		</div>
 	</div>
 </div>
+
+<%- contentFor("espaco-rodape") %>
+<script>
+	function Registrar() {
+		let newname = document.getElementById("newnome").value;
+		let nnome = newname.toString()
+		let nra = parseInt(document.getElementById("newra").value);
+		let ssenha = document.getElementById("newsenha").value;
+		let nsenha = ssenha.toString();
+		var us = {
+			nome:nnome,
+			ra:nra,
+			senha:nsenha
+		};
+		window.location.href = "/registrado?us=" + JSON.stringify(us);
+	}
+
+	function Login() {
+		let logra = parseInt(document.getElementById("ra").value);
+		let logsenha = (document.getElementById("senha").value).toString();
+		var ulog = {
+			ra:logra,
+			senha:logsenha
+		};
+		window.location.href = "/usuario?ulog=" + JSON.stringify(ulog);
+	}
+</script>

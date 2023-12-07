@@ -251,6 +251,7 @@ class IndexRoute {
 	}
 
 	public async login(req: app.Request, res: app.Response) {
+		let registrado
 		let opcoes = {
 			titulo: "Login"
 		};
@@ -259,12 +260,88 @@ class IndexRoute {
 	}
 
 	public async usuario(req: app.Request, res: app.Response) {
+		let getlogdata = req.query.ulog.toString()
+		let login = JSON.parse(getlogdata);
+		
+		let avalist = [];
+		let message = "erro";
+		let ra, senha, nome, curso, semestre, foto;
+		ra = 999999999;
+		nome = "Desconhecido";
+		curso = "Desconhecido";
+		semestre = 0;
+		foto = 'https://www.pngkey.com/png/full/52-523516_empty-profile-picture-circle.png';
+
+		await app.sql.connect(async (sql) => {
+			if (login.curso) {
+				let newcurso = login.curso.toString();
+				let newsemestre = parseInt(login.semestre);
+				await sql.query(`UPDATE usuario SET curso = "${newcurso}", semestre = ${newsemestre} WHERE ra = ${login.ra};`);
+			}
+			const result = await sql.query(`CALL LogUsuario(${login.ra}, "${login.senha}");`);
+			if (result && result.length > 0) {
+				message = result[0][0].message.toString();
+				console.log(message);
+				if (message.includes("falhou") == false) {
+					ra = result[0][0].ra;
+					senha = result[0][0].senha.toString();
+					nome = result[0][0].nome.toString();
+					curso = result[0][0].curso.toString();
+					semestre = result[0][0].semestre;
+					foto = result[0][0].foto.toString();
+				}
+			}
+			const avalias = await sql.query(`SELECT * FROM avaliacao WHERE ra = ${login.ra};`);
+			for (let i=0; i<avalias.length; i++) {
+				let avalia = {
+					aid : avalias[0][i].id,
+					atextoObservacoes : avalias[0][i].textoObservacoes.toString(),
+					arefId : avalias[0][i].refId,
+					adata: avalias[0][i].data,
+					amediaAvaliacao: avalias[0][i].mediaAvaliacao,
+				}
+				avalist.push(avalia);
+			}
+		});
+
 		let opcoes = {
-			titulo: "Usuário"
+			titulo: "Usuário",
+			dados: {
+				ura: ra,
+				unome: nome,
+				usenha: senha,
+				ucurso: curso,
+				usemestre: semestre,
+				ufoto: foto,
+				avaliacoes: avalist
+			}
 		};
 
 		res.render("index/usuario", opcoes);
 	}
+
+	public async registrado(req: app.Request, res: app.Response) {
+		let getrg = req.query.us.toString()
+		let registro = JSON.parse(getrg);
+		let message = "erro";
+
+		await app.sql.connect(async (sql) => {
+			const result = await sql.query(`CALL InsertUsuario(${registro.ra}, "${registro.nome}", "${registro.senha}");`);
+			if (result && result.length > 0) {
+				message = result[0][0].message.toString();
+				console.log(message);
+			}
+		});
+
+		let opcoes = {
+			titulo: "Resultado de Registro",
+			registro: registro,
+			mensagem: message
+		};
+
+		res.render('index/registrado', opcoes);
+	}
 }
+
 
 export = IndexRoute;
