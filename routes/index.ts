@@ -249,6 +249,22 @@ class IndexRoute {
 
 		res.render("index/produtos", opcoes);
 	}
+
+	public async login(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Login"
+		};
+
+		res.render("index/login", opcoes);
+	}
+
+	public async usuario(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Usuário"
+		};
+
+		res.render("index/usuario", opcoes);
+	}
 }
 
 export = IndexRoute;
