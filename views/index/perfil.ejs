@@ -32,66 +32,50 @@ console.log(nomeNotas)
 console.log(notaCats)
 %>
 
-<h1 style="text-align:center"><%= tipo %> - <%= perfil.nome %></h1>
+<h1 style="text-align:center; margin-top: 30px;"><%= tipo %> - <%= perfil.nome %></h1>
 <div class="container-fluid" style="text-align: center; align-items:center;">
-    <div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
-        <div class="col-lg-4">
+    <div class="row" style="max-width:1200px; text-align:center; align-items:center; margin:auto; padding: 20px;">
+        <div class="col-lg-2">
             <div class="profover">
                 <img src="<%= perfil.foto %>" class="profimg">
                 <h1><%= mediaGeral1.toFixed(1) %></h1>
                 <h6>Geral</h6>
             </div>
         </div>
-        <div class="col-lg-8">
+        <div class="col-lg-10">
             <div class="profpoints">
                 <div class="container-fluid">
                     <% for (let i = 0; i < 4; i++) { %>
                     <div class="row">
                         <% for (let j = 0; j < 2; j++) { %>
-                        <div class="col-lg-6">
-                            <div class="profcat">
-                                <h4 class="profcatname"><%= nomeNotas[(i*2) + j] %></h4>
-                                <h4 class="profcatrating"><%= parseFloat(notaCats[(i*2) + j]).toFixed(1) %></h4>
+                            <div class="col-lg-6">
+                                <div class="profcat" style="margin-right: 50px;">
+                                    <h4 class="profcatname"><%= nomeNotas[(i*2) + j] %></h4>
+                                    <h4 class="profcatrating"><%= parseFloat(notaCats[(i*2) + j]).toFixed(1) %></h4>
+                                </div>
                             </div>
-                        </div>
                         <% } %>
                     </div>
-                    <% } %>
+                <% } %>
+
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" style="max-width:max-content; text-align:center; align-items:center; margin:auto; padding: 20px;">
-        <div class="col-lg-4">
-            <div class="proftitle">
-                <h4>#3 em Geral</h4>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="proftitle">
-                <h4>#3 em Geral</h4>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="proftitle">
-                <h4>#3 em Geral</h4>
             </div>
         </div>
     </div>
 </div>
 
 <div class="profbtn">
-    <a href="#" onclick="sendData('<%= ids %>')" style="margin: auto; width:max-content; background-color:transparent; border: none; color:white"><h3>AVALIAR</h3></a>
+    <a href="#" onclick="sendData('<%= ids %>')" style="margin: auto; width:max-content; background-color:transparent; border: none; color:white;"><h3>AVALIAR</h3></a>
 </div>
 <div style="text-align: center; padding:20px">
-    <h3>Sobre</h3>
+    <h3 style="margin-top: 30px;">Sobre</h3>
     <div class="profsobre">
         <h5><%= perfil.descricao %></h5>
     </div>
 </div>
 
 <div style="text-align: center; padding:20px">
-    <h3><%= perfil.numeroAvaliacoes %> Avaliacões</h3>
+    <h3 style="margin-top: 30px;"><%= perfil.numeroAvaliacoes %> Avaliacões</h3>
     <div class="profreviews">
         <div class="container-fluid">
             <% for (let k = 0; k < avaliacoes.length; k++) { %>
@@ -141,9 +125,9 @@ console.log(notaCats)
         text-align: center;
         background-color: #d9d9d9;
         border-radius: 20px;
-        margin: auto;
-        max-width: max-content;
-        padding: 40px;
+        /*margin: auto;
+        max-width: max-content;*/
+        padding: 20px;
     }
     
     .profimg {
@@ -157,16 +141,18 @@ console.log(notaCats)
         text-align: left;
         background-color: rgb(144, 0, 51);
         border-radius: 20px;
-        margin: auto;
-        max-width: max-content;
-        padding: 40px;
+        /*margin: auto;
+        max-width: max-content;*/
+        padding: 20px;
     }
     
     .profcat {
-        display: inline-flex;
+        display: flex;
         text-align: center;
         align-items: center;
-        margin: auto;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
     }
     
     .profcatname {
@@ -197,8 +183,17 @@ console.log(notaCats)
         text-align: center;
         margin: 20px auto;
         max-width: max-content;
+        transition: background-color 0.5s;
     }
     
+    .profbtn:hover {
+    background-color: rgb(225, 0, 79); 
+  }
+
+    .profbtn a {
+    text-decoration: none;
+  }
+
     .profsobre {
         max-width: 80%;
         min-width: 60%;
