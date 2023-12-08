@@ -61,7 +61,7 @@ class IndexRoute {
 				tipo ='materia'
 			}
 
-			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refid = ?", [id]);
+			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refId = ?", [id]);
 		});
 
 		let opcoes = {
@@ -144,7 +144,7 @@ class IndexRoute {
 				tipo = 'professor';
 			} else if (getid.includes("cur")) {
 				data = await sql.query("SELECT id, nome, foto, descricao, curtidas, coordenador, mediaNotaConforto, mediaNotaEmpregabilidade, mediaNotaDificuldade, mediaNotaCargaHoraria, mediaNotaAmenidades, mediaNotaAproveitamento, mediaNotaAprendizado, mediaNotaExpectativas, mediaGeral, anosFormacao, dataCriacao, cidadeLocalizacao, unidade, numeroPremios, numeroAvaliacoes, porcentagemAprovacao FROM curso WHERE id = ?", [
-					getid,
+					id,
 				]);
 				tipo = 'curso';
 			} else if (getid.includes("mat")) {
@@ -154,7 +154,7 @@ class IndexRoute {
 				tipo = 'materia';
 			}
 
-			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refid = ?", [id]);
+			avaliacoes = await sql.query("SELECT id, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, respostas, data FROM avaliacao WHERE refId = ?", [id]);
 		});
 
 		let opcoes = {
@@ -172,7 +172,7 @@ class IndexRoute {
 		let avaliacao = JSON.parse(getav);
 
 		await app.sql.connect(async (sql) => {
-			await sql.query("INSERT INTO avaliacao (refid, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, curtida, data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+			await sql.query("INSERT INTO avaliacao (refId, textoObservacoes, nomeOpcional, cursoOpcional, semestreOpcional, nota1, nota2, nota3, nota4, nota5, nota6, nota7, nota8, curtida, data) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
 				avaliacao.avidref,
 				avaliacao.avobs,
 				avaliacao.avnome,
@@ -201,15 +201,15 @@ class IndexRoute {
 				let table = tables[k];
 				for (let l = 1; l < 9; l++) {
 					let notaAtual = notas[k][l-1];
-					await sql.query(`UPDATE ${table} SET ${notaAtual} = (SELECT AVG(nota${l}) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
+					await sql.query(`UPDATE ${table} SET ${notaAtual} = (SELECT AVG(nota${l}) FROM avaliacao WHERE ${table}.id = avaliacao.refId) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refId);`)
 				}
 			}
 
-			for (let k = 0; k < tables.length; k++) {
+			for (let k = 0; k < 3; k++) {
 				let table = tables[k];
-				await sql.query(`UPDATE ${table} SET curtidas = (SELECT SUM(curtida) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
-				await sql.query(`UPDATE ${table} SET numeroAvaliacoes = (SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid) WHERE EXISTS (SELECT 1 FROM avaliacao WHERE ${table}.id = avaliacao.refid);`)
-				await sql.query(`UPDATE ${table} SET porcentagemAprovacao = (SELECT IF (numeroAvaliacoes > 0, (((SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid AND avaliacao.mediaAvaliacao >= 2.5) * 100) / (SELECT COUNT(refid) FROM avaliacao WHERE ${table}.id = avaliacao.refid)), 50));`)
+				await sql.query(`UPDATE ${table} SET curtidas = (SELECT SUM(curtida) FROM avaliacao WHERE ${table}.id = avaliacao.refId);`)
+				await sql.query(`UPDATE ${table} SET numeroAvaliacoes = (SELECT COUNT(refId) FROM avaliacao WHERE ${table}.id = avaliacao.refId);`)
+				await sql.query(`UPDATE ${table} SET porcentagemAprovacao = (SELECT IF (numeroAvaliacoes > 0, (((SELECT COUNT(refId) FROM avaliacao WHERE ${table}.id = avaliacao.refId AND avaliacao.mediaAvaliacao >= 2.5) * 100) / (SELECT COUNT(refId) FROM avaliacao WHERE ${table}.id = avaliacao.refId)), 50));`)
 			}
 		});
 
