@@ -17,7 +17,7 @@
 		<div class=" collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link mx-2 active" aria-current="page" href="/">Home</a>
+					<a class="nav-link mx-2" aria-current="page" href="/">Home</a>
 				</li>
 				<li class="nav-item" style="min-width: max-content;">
 					<a class="nav-link mx-2" href="/sobre">
@@ -48,3 +48,26 @@
 		</div>
 	</div>
 </nav>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentUrl = window.location.pathname;
+
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(function (element) {
+            element.classList.remove('active');
+        });
+
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(function (element) {
+            var linkUrl = element.getAttribute('href');
+
+            if (linkUrl === currentUrl) {
+                element.classList.add('active');
+            }
+
+            var categoriasPages = ['/cursos', '/materias', '/profs', '/perfil', '/avaliar'];
+            if (categoriasPages.some(page => currentUrl.startsWith(page))) {
+                document.querySelector('.navbar-nav .nav-item.dropdown a.nav-link').classList.add('active');
+            }
+        });
+    });
+</script>
