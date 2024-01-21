@@ -111,3 +111,9 @@
 body {
     background-color: rgb(182, 182, 182);
 }
+
+.cardpic {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
